@@ -1,9 +1,16 @@
+import os
 import pickle
 import streamlit as st
 from streamlit_option_menu import option_menu
+BASE_DIR = os.path.dirname(__file__)
+diabetes_model = pickle.load(
+    open(os.path.join(BASE_DIR, "models", "diabetes_model.pkl"), "rb")
+)
 
-diabities_model = pickle.load(open("C:/Users/shrey/OneDrive/Desktop/diabetes_model.pkl", 'rb'))
-heart_model = pickle.load(open("C:/Users/shrey/OneDrive/Desktop/Heart_model.pkl", 'rb'))
+heart_model = pickle.load(
+    open(os.path.join(BASE_DIR, "models", "Heart_model.pkl"), "rb")
+)
+
 
 with st.sidebar:
     selected = option_menu("Multiple Disease Prediction System",
@@ -96,5 +103,6 @@ if selected == "Heart Disease Prediction":
             st.success(heart_diagnosis)
         except ValueError:
             st.error("Please enter valid numeric values for all fields.")
+
 
 
